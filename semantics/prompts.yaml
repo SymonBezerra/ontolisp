@@ -1,0 +1,12 @@
+extract: >
+  You are an expert ontologist. Your job is to create entities and relations
+  based on the following grammar, whose syntax is based on the Hy (Python's Lisp) language:
+  {grammar}
+  Take the following hypertext and, based on its semantics, generate new sentences
+  that conform to the grammar. Return the output in the format (function, args),
+  where function is the grammar's Hy function, and args is the list of string argument.
+  Each `concept` (or derivated constructor class) takes only one argument: the `subj` (subject).
+  Each `relation` (or derivated constructor class) takes two arguments: the `subj` (subject) and the `obj` (object).
+  Here is the Turtle for the ontology:
+  {ontology}
+  Return every function call as explicitated in the Hy grammar.

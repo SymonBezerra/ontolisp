@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from rdflib import RDF, Namespace, URIRef
+from rdflib import OWL, RDF
 
 definitions = namedtuple("definition", ["ns", "iri", "label", "comment", "parent"])
 
@@ -26,14 +26,22 @@ def concept(ns, iri, label, comment, parent=None):
             )
             current = parent
             parent = parent.definition.parent
+
+        graph_list.append(
+            (
+                self.definition.ns[self.definition.iri],
+                RDF.type,
+                OWL.Class,
+            )
+        )
         return graph_list
 
     def triple(self) -> tuple:
-        return [
+        return (
             self.definition.ns[self.subj],
             RDF.type,
             self.definition.ns[self.definition.iri],
-        ]
+        )
 
     def init(self, subj):
         self.subj = subj

@@ -1,0 +1,62 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix f1: <http://example.org/formula1#> .
+@prefix : <http://example.org/ex#> .
+
+###### TYPES ######
+
+f1:GrandPrix rdf:type owl:Class ;
+    rdfs:label "GrandPrix" ;
+    rdfs:comment "A Grand Prix is a major motor racing event." ;
+    rdfs:subClassOf gufo:Event .
+
+f1:Driver rdf:type owl:Class ;
+    rdfs:label "Driver" ;
+    rdfs:comment "A Driver is a person who competes in motor racing events." ;
+    rdfs:subClassOf gufo:Role .
+
+f1:Season rdf:type owl:Class ;
+    rdfs:label "Season" ;
+    rdfs:comment "A Season is a period during which a series of Grand Prix events take place." ;
+    rdfs:subClassOf gufo:Event .
+
+f1:GrandPrixPosition rdf:type owl:Class ;
+    rdfs:label "GrandPrixPosition" ;
+    rdfs:comment "Represents the finishing position of a driver in a Grand Prix." ;
+    rdfs:subClassOf gufo:Situation .
+
+###### PROPERTIES ######
+
+f1:startsGP rdf:type owl:ObjectProperty ;
+    rdfs:label "startsGP" ;
+    rdfs:comment "Indicates that a Driver has started a Grand Prix." ;
+    rdfs:subPropertyOf gufo:participatesIn ;
+    rdfs:domain f1:Driver ;
+    rdfs:range f1:GrandPrix .
+
+f1:takesPlaceInSeason rdf:type owl:ObjectProperty ;
+    rdfs:label "takesPlaceInSeason" ;
+    rdfs:comment "Indicates that a Grand Prix takes place in a specific Season." ;
+    rdfs:domain f1:GrandPrix ;
+    rdfs:range f1:Season .
+
+f1:hasDriver rdf:type owl:ObjectProperty ;
+    rdfs:label "hasDriver" ;
+    rdfs:comment "Indicates that a GrandPrixPosition is associated with a specific Driver." ;
+    rdfs:domain f1:GrandPrixPosition ;
+    rdfs:range f1:Driver .
+
+f1:hasGrandPrix rdf:type owl:ObjectProperty ;
+    rdfs:label "hasGrandPrix" ;
+    rdfs:comment "Indicates that a GrandPrixPosition is associated with a specific Grand Prix." ;
+    rdfs:domain f1:GrandPrixPosition ;
+    rdfs:range f1:GrandPrix .
+
+f1:hasPosition rdf:type owl:DatatypeProperty ;
+    rdfs:label "hasPosition" ;
+    rdfs:comment "The finishing position of the driver in the Grand Prix." ;
+    rdfs:domain f1:GrandPrixPosition ;
+    rdfs:range xsd:integer .
